@@ -8,7 +8,7 @@
 </style>
 <div class="card uper">
   <div class="card-header">
-    View Post
+    View Task
 
 
                 <a class="btn btn-primary" href="{{ route('posts.index') }}"> Back</a>
@@ -22,9 +22,9 @@
 
             <div class="form-group">
 
-                <strong>Name:</strong>
+                <strong>Task:</strong>
 
-                {{ $post->name }}
+                {{ $post->task }}
 
             </div>
 
@@ -35,9 +35,9 @@
 
             <div class="form-group">
 
-                <strong>Address:</strong>
+                <strong>Description:</strong>
 
-                {{ $post->address }}
+                {{ $post->description }}
 
             </div>
 

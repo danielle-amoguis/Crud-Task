@@ -1,40 +1,60 @@
-@extends('layouts.app')
+@extends('layouts.app', ['activePage' => 'posts', 'titlePage' => __('Create Task')])
 
 @section('content')
-<style>
-  .uper {
-    margin-top: 40px;
-  }
-</style>
-<div class="card uper">
-  <div class="card-header">
-    Create Post
-  </div>
-  <div class="card-body">
-    @if ($errors->any())
-    <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show">
-      <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-</div>
-      </div><br />
-    @endif
-      <form method="post" action="{{ route('posts.store') }}">
-          <div class="form-group">
-              @csrf
-              <label for="name">Name:</label>
-              <input type="text" class="form-control" name="name" id="name" />
-          </div>
-          <div class="form-group">
-              <label for="price">Address</label>
-              <textarea name="address" id="address" class="form-control"></textarea>
-              
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-  </div>
-</div>
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <form method="post" action="{{ route('posts.store') }}" autocomplete="off" class="form-horizontal">
+            @csrf
+            <div class="card ">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title">{{ __('Create Task') }}</h4>
+                <p class="card-category">{{ __('Input Credentials') }}</p>
+              </div>
+              <div class="card-body ">
+                @if (session('status'))
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="material-icons">close</i>
+                        </button>
+                        <span>{{ session('status') }}</span>
+                      </div>
+                    </div>
+                  </div>
+                @endif
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Task') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" id="input-name" type="text" placeholder="{{ __('Task') }}" value="{{ old('name') }}" required="true" aria-required="true"/>
+                      @if ($errors->has('name'))
+                        <span id="name-error" class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Description') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" id="input-address" type="address" placeholder="{{ __('Description') }}" value="{{ old('address') }}" required />
+                      @if ($errors->has('address'))
+                        <span id="address-error" class="error text-danger" for="input-address">{{ $errors->first('address') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ml-auto mr-auto">
+                <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+        </div>
+      </div>
 @endsection

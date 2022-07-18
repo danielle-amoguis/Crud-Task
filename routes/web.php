@@ -96,3 +96,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('posts', 'PostController', ['except' => ['show']]);
+});
