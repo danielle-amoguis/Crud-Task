@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'posts', 'titlePage' => __('CRUD Posts')])
+@extends('layouts.app', ['activePage' => 'tasks', 'titlePage' => __('CRUD Task')])
 
 @section('content')
 <div class="content">
@@ -7,7 +7,7 @@
       <div class="col-md-12">
           <div class="row">
             <div class="col-12 text-left">
-                <a href="{{ route('posts.create')}}" class="btn btn-info">Create Post</a>
+                <a href="{{ route('tasks.create')}}" class="btn btn-info">Create Post</a>
             </div>
           </div>
         <div class="card">
@@ -26,15 +26,15 @@
                   <th>Action</th> 
                 </thead>
                 <tbody>
-                 @foreach ($posts as $post)
+                 @foreach ($tasks as $task)
                 <tr>
-                    <td>{{$post->id}}</td>
-                    <td>{{$post->name}}</td>
-                    <td>{{$post->address}}</td>
-                    <td>{{$post->created_at}}</td>
+                    <td>{{$task->id}}</td>
+                    <td>{{$task->task}}</td>
+                    <td>{{$task->description}}</td>
+                    <td>{{$task->created_at}}</td>
                     <td>
-                      <form action="{{ route('posts.destroy', $post->id) }}" method="post">
-                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a>
+                      <form action="{{ route('tasks.destroy', $task->id) }}" method="post">
+                        <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-warning">Edit</a>
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" type="submit" onclick="return confirm('{{ __('Are you sure you want to delete?') }}')">Delete</button>

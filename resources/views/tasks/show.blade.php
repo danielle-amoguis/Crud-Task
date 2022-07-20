@@ -11,7 +11,7 @@
     View Task
 
 
-                <a class="btn btn-primary" href="{{ route('posts.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('tasks.index') }}"> Back</a>
 
             
   </div>
@@ -24,7 +24,7 @@
 
                 <strong>Task:</strong>
 
-                {{ $post->task }}
+                {{ $task->task }}
 
             </div>
 
@@ -37,7 +37,7 @@
 
                 <strong>Description:</strong>
 
-                {{ $post->description }}
+                {{ $task->description }}
 
             </div>
 

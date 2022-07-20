@@ -18,8 +18,8 @@
         </a>
       </li>
 
-      <li class="nav-item{{ $activePage == 'posts' ? ' active' : ''}}">
-        <a class="nav-link" href="{{ route('posts.index') }}">
+      <li class="nav-item{{ $activePage == 'tasks' ? ' active' : ''}}">
+        <a class="nav-link" href="{{ route('tasks.index') }}">
           <i class="material-icons">forum</i>
             <p>{{ __('Tasks') }}</p>
       </li>

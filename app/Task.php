@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Task extends Model
 {
     //
     protected $fillable = [
 
-        'name', 'address'
+        'task', 'description'
 
     ];
 }

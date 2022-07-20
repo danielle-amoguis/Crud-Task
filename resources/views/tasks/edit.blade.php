@@ -1,16 +1,17 @@
-@extends('layouts.app', ['activePage' => 'posts', 'titlePage' => __('Create Task')])
+@extends('layouts.app', ['activePage' => 'tasks', 'titlePage' => __('Edit Task')])
 
 @section('content')
   <div class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <form method="post" action="{{ route('posts.store') }}" autocomplete="off" class="form-horizontal">
-            @csrf
+          <form method="post" action="{{ route('tasks.update', $task) }}" autocomplete="off" class="form-horizontal">
+            @csrf 
+            @method('put')
             <div class="card ">
               <div class="card-header card-header-primary">
-                <h4 class="card-title">{{ __('Create Task') }}</h4>
-                <p class="card-category">{{ __('Input Credentials') }}</p>
+                <h4 class="card-title">{{ __('Edit Task') }}</h4>
+                <p class="card-category">{{ __('Input Changes') }}</p>
               </div>
               <div class="card-body ">
                 @if (session('status'))
@@ -28,10 +29,10 @@
                 <div class="row">
                   <label class="col-sm-2 col-form-label">{{ __('Task') }}</label>
                   <div class="col-sm-7">
-                    <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                      <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" id="input-name" type="text" placeholder="{{ __('Task') }}" value="{{ old('name') }}" required="true" aria-required="true"/>
-                      @if ($errors->has('name'))
-                        <span id="name-error" class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
+                    <div class="form-group{{ $errors->has('task') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('task') ? ' is-invalid' : '' }}" name="task" id="input-task" type="text" placeholder="{{ __('Task') }}" value="{{ old('task', $task->task) }}" required="true" aria-required="true"/>
+                      @if ($errors->has('task'))
+                        <span id="task-error" class="error text-danger" for="input-task">{{ $errors->first('task') }}</span>
                       @endif
                     </div>
                   </div>
@@ -39,10 +40,10 @@
                 <div class="row">
                   <label class="col-sm-2 col-form-label">{{ __('Description') }}</label>
                   <div class="col-sm-7">
-                    <div class="form-group{{ $errors->has('address') ? ' has-danger' : '' }}">
-                      <input class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" id="input-address" type="address" placeholder="{{ __('Description') }}" value="{{ old('address') }}" required />
-                      @if ($errors->has('address'))
-                        <span id="address-error" class="error text-danger" for="input-address">{{ $errors->first('address') }}</span>
+                    <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" id="input-description" type="description" placeholder="{{ __('Description') }}" value="{{ old('description', $task->description) }}" required />
+                      @if ($errors->has('description'))
+                        <span id="description-error" class="error text-danger" for="input-description">{{ $errors->first('description') }}</span>
                       @endif
                     </div>
                   </div>
