@@ -141,5 +141,27 @@
         <script src="{{ asset('material') }}/demo/demo.js"></script>
         <script src="{{ asset('material') }}/js/settings.js"></script>
         @stack('js')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js%22%3E"></script>
+        <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+        <script>
+
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+        
+            var pusher = new Pusher('8c2c7d68fad0dc3e7e41', {
+              cluster: 'ap1'
+            });
+        
+            var channel = pusher.subscribe('my-channel');
+            channel.bind('task-created', function(data) {
+              alert("Task Successfully Created!");
+            });
+            channel.bind('task-updated', function(data) {
+              alert("Task Successfully Updated!");
+            });
+            channel.bind('task-deleted', function(data) {
+              alert("Task Successfully Deleted!");
+            });
+          </script>      
     </body>
 </html>

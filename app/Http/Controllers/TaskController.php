@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use Illuminate\Http\Request;
+use App\Events\TaskCreated;
+use App\Events\TaskUpdated;
+use App\Events\TaskDeleted;
 
 class TaskController extends Controller
 {
@@ -45,8 +48,9 @@ class TaskController extends Controller
      
             ]);
      
-            Task::create($request->all());
-     
+            $task = Task::create($request->all());
+            event(new TaskCreated($task));
+
             return redirect()->route('tasks.index')
                     ->with('success','Task created successfully.');
     }
@@ -80,15 +84,16 @@ class TaskController extends Controller
      * @param  \App\Task  $Task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $Task)
+    public function update(Request $request, Task $task)
     {
         $request->validate([
             'task' => 'required',
             'description' => 'required',
             ]);
      
-            $Task->update($request->all());
-     
+           $taskupdate = $task->update($request->all());
+            event(new TaskUpdated($taskupdate));
+            
             return redirect()->route('tasks.index')->with('success','Task updated successfully');
     }
 
@@ -100,8 +105,9 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        $task->delete();
- 
+        $taskdelete = $task->delete();
+        event(new TaskDeleted($taskdelete));
+
         return redirect()->route('tasks.index')
                 ->with('success','Task deleted successfully');
     }

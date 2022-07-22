@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use app\Events\TaskCreated;
+use app\Events\TaskUpdated;
+use app\Events\TaskDeleted;
+
 Route::resource('tasks','TaskController');
 Route::get('/', function () {
     return view('welcome');
@@ -95,7 +99,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
-
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('tasks', 'TaskController', ['except' => ['show']]);
