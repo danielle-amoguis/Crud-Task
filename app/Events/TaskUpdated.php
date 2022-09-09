@@ -13,15 +13,15 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class TaskUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $text;
+    public $task;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($text)
+    public function __construct($task)
     {
-        $this->text = $text;
+        $this->task = $task;
     }
 
     /**

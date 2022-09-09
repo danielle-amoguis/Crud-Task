@@ -91,8 +91,8 @@ class TaskController extends Controller
             'description' => 'required',
             ]);
      
-           $taskupdate = $task->update($request->all());
-            event(new TaskUpdated($taskupdate));
+            $task->update($request->all());
+            event(new TaskUpdated($task));
             
             return redirect()->route('tasks.index')->with('success','Task updated successfully');
     }
@@ -105,8 +105,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        $taskdelete = $task->delete();
-        event(new TaskDeleted($taskdelete));
+        $task->delete();
+        event(new TaskDeleted($task->id));
 
         return redirect()->route('tasks.index')
                 ->with('success','Task deleted successfully');

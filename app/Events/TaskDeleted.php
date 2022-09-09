@@ -13,15 +13,15 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class TaskDeleted implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $text;
+    public $id;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($text)
+    public function __construct(int $id)
     {
-        $this->text = $text;
+        $this->id = $id;
     }
 
     /**
